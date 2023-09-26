@@ -2,30 +2,25 @@
     <header :class="{ 'scrolled-nav': scrolledNav }">
         <nav>
             <div class="branding">
-                <img src="@/assets/logo.png" alt="" />
+                <img @click="navigateTo('/')" src="@/assets/logo.png" alt="" />
             </div>
             <ul v-show="!mobile" class="navigation">
-                <div class="dropdown-menu">
-                    <li><router-link class="link" :to="{ name: 'Home' }">Home</router-link></li>
-                    <div class="dropdown-contents">
-                        
-                    </div>
-                </div>
-                <li><router-link class="link" :to="{ name: 'About' }">About</router-link></li>
-                <li><router-link class="link" :to="{ name: 'Contact' }">Contact</router-link></li>
+                <li><router-link class="link" to="/">Home</router-link></li>
+                <li><router-link class="link" to="/blog">Blog</router-link></li>
+                <li><router-link class="link" to="/about">About</router-link></li>
             </ul>
             <div class="icon" @click="toggleMobileNav" v-show="mobile" :class="{ 'icon-active': mobileNav }">
                 <font-awesome-icon :icon="['fas', 'bars']" />
             </div>
             <transition name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
-                <li><router-link class="link" :to="{ name: 'Home' }">Home</router-link></li>
-                <li><router-link class="link" :to="{ name: 'About' }">About</router-link></li>
-                <li><router-link class="link" :to="{ name: 'Contact' }">Contact</router-link></li>
+                    <li><router-link class="link" to="/">Home</router-link></li>
+                    <li><router-link class="link" to="/about">About</router-link></li>
             </ul>
             </transition>
         </nav>
     </header>
+    <router-view/>
 </template>
 
 <script>
@@ -47,6 +42,13 @@ export default {
         window.addEventListener("scroll", this.updateScroll)
     },
     methods: {
+        navigateTo (page) {
+            if (page.startsWith('/')) {
+                this.$router.push(page)    
+            } else {
+                window.location.href(page)
+            }
+        },
         toggleMobileNav () {
             this.mobileNav = !this.mobileNav
         },
@@ -80,8 +82,8 @@ header {
     top: 0px;
     left: 0px;
     transition: .5s ease all;
-    color: #fff;
     box-shadow: 0px 2px #ff851b6c;
+
 
     nav {
         position: relative;
@@ -130,6 +132,10 @@ header {
             img {
                 max-height: 50px;
                 transition: .5s ease all;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
 

@@ -1,30 +1,28 @@
 <template>
   <NavigationBar/>
-  <UnderConstruction/>
 </template>
 
 <script>
 import NavigationBar from './components/NavigationBar.vue';
-import UnderConstruction from './components/UnderConstruction.vue';
 
 export default {
   name: 'App',
   components: {
     NavigationBar,
-    UnderConstruction
-}
+  }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  color: #2c3e50;
 }
 
 body {
-  background-color: #fff;
+  color: #2c3e50;
 }
 </style>
