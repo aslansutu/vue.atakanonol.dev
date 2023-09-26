@@ -1,16 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <NavigationBar/>
+  <UnderConstruction/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavigationBar from './components/NavigationBar.vue';
+import UnderConstruction from './components/UnderConstruction.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    NavigationBar,
+    UnderConstruction
+}
 }
 </script>
 
@@ -20,7 +22,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+body {
+  background-color: #fff;
 }
 </style>
