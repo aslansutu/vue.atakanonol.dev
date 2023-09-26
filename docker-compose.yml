@@ -1,0 +1,24 @@
+version: '3'
+services:
+  vue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: "always"
+    networks:
+      - "traefik-proxy"
+    volumes:
+      - .:/app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-proxy"
+      - "traefik.http.routers.vue.rule=Host(`${DOMAIN}`) && PathPrefix(`/`) || Host(`${SUB}.${DOMAIN}`) && PathPrefix(`/`)"
+      - "traefik.http.routers.vue.entrypoints=websecure"
+      - "trafeik.http.routers.vue.tls=true"
+      - "traefik.http.routers.vue.tls.certresolver=production"
+      - "traefik.http.services.vue.loadbalancer.server.port=3000"
+
+networks:
+  traefik-proxy:
+    external: true
+      
