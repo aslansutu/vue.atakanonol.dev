@@ -15,6 +15,7 @@
             <transition name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
                     <li><router-link class="link" to="/">Home</router-link></li>
+                    <li><router-link class="link" to="/blog">Blog</router-link></li>
                     <li><router-link class="link" to="/about">About</router-link></li>
             </ul>
             </transition>
