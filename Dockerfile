@@ -1,22 +1,30 @@
-# Use an official Node.js runtime as the base image
-FROM node:latest
+# Stage 1: Build the Angular App
+FROM node:latest as build
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
+# Copy package.json and package-lock.json (if available)
 COPY package*.json ./
 
-# Install project dependencies
+# Install app dependencies
 RUN npm install
 
-# Copy the entire project to the container
+# Copy app source code
 COPY . .
 
-# Build the Vue.js app for production
+# Build the Angular app with production configuration
 RUN npm run build
 
-RUN npm install -g serve
+# Stage 2: Serve the Angular App with NGINX
+FROM nginx:alpine
 
-# Start the web server when the container runs
-CMD [ "serve", "-s", "dist" ]
+# Copy the compiled app from the build stage to NGINX's HTML directory
+COPY --from=build /app/dist/ /usr/share/nginx/html
+
+
+# Expose port 80 (default for HTTP)
+EXPOSE 80
+
+# Start NGINX when the container runs
+CMD ["nginx", "-g", "daemon off;"]
+
