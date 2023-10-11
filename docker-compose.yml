@@ -16,7 +16,7 @@ services:
       - "traefik.http.routers.vue.entrypoints=websecure"
       - "trafeik.http.routers.vue.tls=true"
       - "traefik.http.routers.vue.tls.certresolver=production"
-      - "traefik.http.services.vue.loadbalancer.server.port=3000"
+      - "traefik.http.services.vue.loadbalancer.server.port=80"
 
 networks:
   traefik-proxy:
