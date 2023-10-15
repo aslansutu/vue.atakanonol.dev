@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: vue_atakanonol_dev:$(git rev-parse --short HEAD)
+    image: vue_atakanonol_dev:${HASH}
     restart: "always"
     networks:
       - "traefik-proxy"
