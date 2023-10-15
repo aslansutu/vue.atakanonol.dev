@@ -17,6 +17,14 @@
 </template>
 
 <script>
+import wall_bounce from '@/assets/sounds/wall_bounce.mp3'
+import pong from '@/assets/sounds/pong.mp3'
+import game_start from '@/assets/sounds/game_start.mp3'
+import game_end from '@/assets/sounds/game_end.mp3'
+
+const wall_sound = new Audio(wall_bounce)
+const paddle_sound = new Audio(pong)
+
 export default {
     name: 'PongGame',
     data() {
@@ -152,6 +160,7 @@ export default {
                         this.ball.speed.x += 1
                     }
                 }
+                wall_sound.play()
             }
 
             // Right Paddle Collision
@@ -168,6 +177,7 @@ export default {
 
                     this.ball.speed.y = ((this.rightPaddle.position.top + (this.rightPaddle.size.height/2.0)) - this.ball.position.y) / (-10)
                     this.score++
+                    paddle_sound.play()
                 }
             }
 
@@ -184,6 +194,7 @@ export default {
                         this.ball.speed.x *= -1
 
                         this.ball.speed.y = ((this.leftPaddle.position.top + (this.leftPaddle.size.height/2.0)) - this.ball.position.y) / (-10)
+                        paddle_sound.play()
                     }
             }
 
@@ -223,6 +234,7 @@ export default {
             }
         },
         startGame() {
+            new Audio(game_start).play()
             window.addEventListener('keydown', this.handleKeyDown)
             window.addEventListener('keyup', this.handleKeyUp)
             this.interval = setInterval(() => this.updateBall(), 24)
@@ -233,6 +245,7 @@ export default {
             this.gameStopped = false
         },
         endGame() {
+            new Audio(game_end).play()
             window.removeEventListener('keyup', this.handleKeyUp)
             window.removeEventListener('keydown', this.handleKeyDown)
             clearInterval(this.interval)
