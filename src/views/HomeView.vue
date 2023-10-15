@@ -1,14 +1,16 @@
 <template>
-  <UnderConstruction/>
+  <div style="margin-top: 10vh;justify-content: center;">
+    <PongGame/>
+  </div>
 </template>
 
 <script>
-import UnderConstruction from '@/components/UnderConstruction'
+import PongGame from '@/components/PongGame.vue';
 
 export default {
   name: 'HomeView',
   components: {
-    UnderConstruction,
+    PongGame
   }
 }
 </script>
